@@ -61,7 +61,7 @@ float inversionIterativa(int meses , float cantidad){
     for(int i = 0 ;i<meses ;i++){
         cantidad=cantidad-(cantidad*0.1875);
     };
-    cout<<cantidad;
+    cout<<cantidad<<endl;
 };
 
 // potencia
@@ -71,16 +71,44 @@ int  potenciaRecursiva(int x , int y){
        potenciaRecursiva(x*x, y-1);
    } 
    else{
-       cout<<x;
+       cout<<x<<endl;
    };
 }
 int potenciaIterativa(int x , int y){
-    for(int i = 0;i<1;i++){
+    for(int i = 0;i<=1;i++){
         x = x*x;
     }
-    cout<<x;
+    cout<<x<<endl;
 }
 
 int main(){
-    
+    // llamar fibonachi con 10 iteraciones
+    cout<<"fibonachi recursivo: ";
+    fibonacchi_recursivo(10);
+    cout<<endl;
+    cout<<"fibonachi iterativo: ";
+    fibonacchi_iterativo(10);
+    cout<<endl;
+    // llamar funciones bacterias con 10 dias
+    cout<<"bacteria recursiva: ";
+    bacteriarecursiva(10);
+    cout<<endl;
+    cout<<"bacteria iterativa: ";
+    bacteriaiterativa(10);
+    cout<<endl;
+    // llamar interes compuesto con 10 meses con 10000 pesos 
+    cout<<"inversion recursiva: ";
+    inversionRecursiva(10 , 10000);
+    cout<<endl;
+    cout<<"inversion iterativa: ";
+    inversionIterativa(10 , 10000);
+    cout<<endl;
+   // Potencia de 10^5
+    cout<<"potencia recursiva: ";
+    potenciaRecursiva(10,3);
+    cout<<endl;
+    cout<<"potencia Iterativa:";
+    potenciaIterativa(10,3);
+    cout<<endl;
 }
+
