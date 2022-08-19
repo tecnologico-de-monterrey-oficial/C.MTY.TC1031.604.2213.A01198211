@@ -31,7 +31,7 @@ int fibonacchi_iterativo(int n){
 
 float bacteriarecursiva(int n , float bacterias = 1){
     if(n> 0){
-        bacteriarecursiva(n-1 ,bacterias*(3.78/2.34));
+        bacteriarecursiva(n-1 ,bacterias*(1+3.78-2.34));
     }
     else{
         cout<<truncf(bacterias)<<endl;
@@ -40,7 +40,8 @@ float bacteriarecursiva(int n , float bacterias = 1){
 float bacteriaiterativa(int n){
     float bacterias = 1;
     for(int i = 0 ; i<n ;i++){
-        bacterias=bacterias*(3.78/2.34);
+        bacterias=bacterias*(1+3.78-2.34);
+        
 
     }
     cout<<truncf(bacterias)<<endl;
