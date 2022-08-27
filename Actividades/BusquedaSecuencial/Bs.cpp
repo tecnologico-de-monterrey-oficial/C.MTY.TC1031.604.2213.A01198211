@@ -18,7 +18,9 @@ bool sequencialSearch(vector<int> list, int n) {
 }
 
 int main() {
-    vector<int> list = {1,2,3,4,5};
+    vector<int> list;
+    list.push_back(2);
+    cout<<list[0];
    int n;
    cin >> n;
    sequencialSearch(list, n);
