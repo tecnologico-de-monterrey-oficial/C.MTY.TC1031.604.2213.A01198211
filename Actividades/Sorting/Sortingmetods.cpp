@@ -6,8 +6,8 @@
 using namespace std;
 template <class T>
 void  Bubble_sort(vector<T> &list){
-   for(int i = 0; i <= list.size()-1 ; i++){
-       for(int j = 0 ; j<=list.size()-1; j++){
+   for(int i = 0; i <list.size()-1; i++){
+       for(int j = 0 ; j<list.size()-i-1; j++){
            if(list[j]>list[j+1]){
                 T item = list[j];
                 list[j]=list[j+1];
@@ -63,11 +63,6 @@ void InsertionSort(vector<T> &list){
 
 template <class T>
 void printList(vector<T> &list, int msg) {
-    if (msg == 0) {
-        cout << "Lista Original" << endl;
-    } else {
-        cout << "Lista Ordenada" << endl;
-    }
     for (auto el : list) {
         cout << el << " ";
     }
@@ -124,7 +119,19 @@ void  MergeSort(vector<T> &list , int inf , int sup){
 }
 
 template<class T>
-void Swapsort(vector<T> &list){};
+void Swapsort(vector<T> &list, int &comparisons , int &swaps){
+   for(int i = 0 ; i<list.size()-1;i++){
+      for(int j = i+1 ; j<list.size();j++){
+         comparisons++;
+         if(list[i]>list[j]){
+            T item = list[i];
+            list[i]=list[j];
+            list[j]= item;
+            swaps++;
+         }
+      }
+   }
+};
 
 
 int main(){
@@ -148,8 +155,15 @@ int main(){
 
     cout<<"ordenamiento de merge"<<endl;
    list = listabase; 
-    printList(list, 0);
     MergeSort(list , 0 , list.size()-1);
+    printList(list,1);
+    cout<<endl<<endl<<endl;
+    
+    cout<<"ordenamiento de swap"<<endl;
+   list = listabase; 
+   int comparisons = 0;
+   int swaps = 0;
+    Swapsort(list , comparisons, swaps);
     printList(list,1);
     cout<<endl<<endl<<endl;
     
