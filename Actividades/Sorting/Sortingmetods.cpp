@@ -1,20 +1,11 @@
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
 #include <cstdlib>
 using namespace std;
-
 template <class T>
-vector<T> Swap(vector<T> list, int index){
-    T item = list[index];
-    list[index]=list[index+1];
-    list[index+1]=item;
-    return list;
-}
-
-
-template <class T>
-vector<T> Bubble_sort(vector<T> list){
+void  Bubble_sort(vector<T> &list){
    for(int i = 0; i <= list.size()-1 ; i++){
        for(int j = 0 ; j<=list.size()-1; j++){
            if(list[j]>list[j+1]){
@@ -22,16 +13,16 @@ vector<T> Bubble_sort(vector<T> list){
                 list[j]=list[j+1];
                 list[j+1]=item;
            }
-           cout<<list[j]<<",";
        }
-       cout<<endl;
    } 
-   return list;
+   for(int i = 0 ; i<= list.size(); i++){
+      cout<<list[i]<<" ";
+   }
 }
 
 
 template <class T>
-vector<T> Selection_sort(vector<T> list){
+void Selection_sort(vector<T> &list){
     for(int i = 0 ; i<=list.size()-1;i++){
         T item = list[i];
         T lowest = list[i];
@@ -46,27 +37,122 @@ vector<T> Selection_sort(vector<T> list){
         list[index] = list [i];
         list [i]= lowest;
 
+    }
         for(int j = 0 ; j<=list.size() -1; j++){
            cout<<list[j]<<",";
         }
         cout<<endl;
-    }
-    return list;
 }
 
+template <class T>
+void InsertionSort(vector<T> &list){
+   for(int i = 1; i<= list.size()-1;i++){
+      T key = list[i];
+      int j = i-1;
+      while (j>=0 && list[j]>key) {
+         list[j+1]=list[j];
+         j--;
+      }
+      list[j+1]=key;
+   }
+      for (int k = 0 ; k<=list.size()-1; k++) {
+         cout<<list[k]<<",";
+      }
+      cout<<endl;
+}
+
+template <class T>
+void printList(vector<T> &list, int msg) {
+    if (msg == 0) {
+        cout << "Lista Original" << endl;
+    } else {
+        cout << "Lista Ordenada" << endl;
+    }
+    for (auto el : list) {
+        cout << el << " ";
+    }
+    cout << endl;
+}
+
+template<class T>
+void Merge(vector<T> &list , int inf , int mid , int sup){
+   int i , j , k;
+   int elementosI = mid - inf + 1;
+   int elementosD = sup-mid;
+   vector<T> left(elementosI);
+   vector<T> right(elementosD);
+   for(i = 0; i<elementosI; i++){
+      left[i]= list[inf+i];
+   }
+   for(j = 0; j< elementosD; j++){
+      right[j]= list[mid+1+j];
+   }
+   i = 0; 
+   j = 0; 
+   k = inf;
+   while( i<elementosI && j<elementosD){
+      if(left[i]<=right[j]){
+         list[k] = left[i];
+         i++;
+      }
+      else{
+         list[k] = right[j];
+         j++;
+      }
+      k++;
+   }
+   while (i<elementosI) {
+      list[k]=left[i];
+      i++ ; k++;
+   }
+   while (j<elementosD) {
+      list[k]=right[j];
+      j++ ; k++;
+   }
+
+}
+
+template<class T>
+void  MergeSort(vector<T> &list , int inf , int sup){
+   int mid;
+   if(inf<sup){
+      mid = inf+(sup-inf)/2;
+      MergeSort(list, inf, mid);
+      MergeSort(list, mid + 1, sup);
+      Merge(list , inf , mid , sup);
+   }
+}
+
+template<class T>
+void Swapsort(vector<T> &list){};
 
 
 int main(){
-    vector<int> list;
+    vector<int> listabase,list;
     for(int i = 0 ; i <= 10 ; i++){
-        list.push_back(rand()%100+1);
+        listabase.push_back(rand()%100+1);
     }
     cout<<"ordenado Bubble"<<endl;
+   list = listabase; 
     Bubble_sort<int>(list);
     cout<<endl<<endl<<endl;
     cout<<"ordenamiento de seleccion"<<endl;
-    Selection_sort(list);
+   list = listabase; 
+    Selection_sort<int>(list);
     cout<<endl<<endl<<endl;
+
+    cout<<"ordenamiento de insercion"<<endl;
+   list = listabase; 
+    InsertionSort<int>(list);
+    cout<<endl<<endl<<endl;
+
+    cout<<"ordenamiento de merge"<<endl;
+   list = listabase; 
+    printList(list, 0);
+    MergeSort(list , 0 , list.size()-1);
+    printList(list,1);
+    cout<<endl<<endl<<endl;
+    
     return 0;
 };
 
