@@ -111,9 +111,6 @@ void  buubleSort(vector<T> &list){
            }
        }
    } 
-   for(int i = 0 ; i<= list.size(); i++){
-      cout<<list[i]<<" ";
-   }
    cout<<endl<<"comparasiones: "<<comparisons<<" Intercambios: "<<swaps<<endl;
 }
 
@@ -217,16 +214,13 @@ void printList(vector<T> &list) {
     cout << endl;
 }
 
-//funcion merge para el merge sort O(n)
-template <class T>
-void merge(vector<T> &list, int inf, int mid, int sup)
-{
+template<class T>
+void merge(vector<T> &list, int inf, int mid, int sup) {
     // crear la lista temporal del lado izquierdo
     // crear un vector vacío (left)
     vector<T> left;
     // recorremos la lista desde inf hasta mid
-    for (int i = inf; i <= mid; i++)
-    {
+    for (int i=inf; i<=mid; i++) {
         // agregamos el elemento a la lista izquierda (left)
         left.push_back(list[i]);
     }
@@ -234,8 +228,7 @@ void merge(vector<T> &list, int inf, int mid, int sup)
     // crear un vector vacío (right)
     vector<T> right;
     // recorremos la lista desde mid+1 hast sup
-    for (int i = mid + 1; i <= sup; i++)
-    {
+    for (int i=mid+1; i<=sup; i++) {
         // agregamos el elemento a la lista derecha (right)
         right.push_back(list[i]);
     }
@@ -249,25 +242,21 @@ void merge(vector<T> &list, int inf, int mid, int sup)
     int idx = inf; // Ojo que sea igual a inf
     // Hacemos un ciclo mientras el índice de la izquierda < al tamaño de la lista izquierda y (&&)
     // el índice de la derecha < al tamaño de la lista derecha
-    while (idxLeft < left.size() && idxRight < right.size())
-    {
-        // Comparamos si el valor que se encuentra en el índice de la izquierda (idxLeft) es menor
+    while (idxLeft < left.size() && idxRight < right.size()) {
+        // Comparamos si el valor que se encuentra en el índice de la izquierda (idxLeft) es menor 
         // al valor que se encuentra en el índice de la derecha (idxRight)
-        if (left[idxLeft] < right[idxRight])
-        {
-            // Si es menor
-            // asignamos el valor de la lista izquierda que se encuentra en la posición del índice izquierdo (idxLeft)
+        if (left[idxLeft] < right[idxRight]) {
+        // Si es menor
+            // asignamos el valor de la lista izquierda que se encuentra en la posición del índice izquierdo (idxLeft) 
             // en la posición de índice de la lista (idx)
             list[idx] = left[idxLeft];
             // incrementar el índice de la lista (idx)
             idx++;
             // incrementar el índice de la lista izquierda (idxLeft)
             idxLeft++;
-        }
-        else
-        {
-            // No es menor
-            // asignamos el valor de la lista derecha que se encuentra en la posición del índice derecho (idxRight)
+        } else {
+        // No es menor
+            // asignamos el valor de la lista derecha que se encuentra en la posición del índice derecho (idxRight) 
             // en la posición de índice de la lista (idx)
             list[idx] = right[idxRight];
             // incrementar el índice de la lista (idx)
@@ -277,9 +266,8 @@ void merge(vector<T> &list, int inf, int mid, int sup)
         }
     }
     // Hacemos un ciclo mientras el índice de la izquierda < al tamaño de la lista izquierda
-    while (idxLeft < left.size())
-    {
-        // asignamos el valor de la lista izquierda que se encuentra en la posición del índice izquierdo (idxLeft)
+    while (idxLeft < left.size()) {
+        // asignamos el valor de la lista izquierda que se encuentra en la posición del índice izquierdo (idxLeft) 
         // en la posición de índice de la lista (idx)
         list[idx] = left[idxLeft];
         // incrementar el índice de la lista (idx)
@@ -288,9 +276,8 @@ void merge(vector<T> &list, int inf, int mid, int sup)
         idxLeft++;
     }
     // Hacemos un ciclo mientras el índice de la derecha < al tamaño de la lista derecha
-    while (idxRight < right.size())
-    {
-        // asignamos el valor de la lista derecha que se encuentra en la posición del índice derecho (idxRight)
+    while (idxRight < right.size()) {
+        // asignamos el valor de la lista derecha que se encuentra en la posición del índice derecho (idxRight) 
         // en la posición de índice de la lista (idx)
         list[idx] = right[idxRight];
         // incrementar el índice de la lista (idx)
@@ -300,27 +287,23 @@ void merge(vector<T> &list, int inf, int mid, int sup)
     }
 }
 
-//Merge Sort O(nlogn)
 template <class T>
-void MergeSort(vector<T> &list, int inf, int sup)
-{
+void mergeSort(vector<T> &list, int inf, int sup) {
     // Condición de control para validar que ya no puedo separar las sublistas
     // Si el indice inferior = indice superior
-    if (inf < sup)
-    {
-        // Cuando el indice inferior sea menor al indice superior
+    if (inf < sup) {
+    // Cuando el indice inferior sea menor al indice superior
         // Calcular el índice del medio ((inf+sup)/2)
         int mid = (inf + sup) / 2;
         // Volver a llamar a la función con la sublista del lado izquierdo (list,inf,mid)
-        MergeSort(list, inf, mid);
+        mergeSort(list,inf,mid);
         // Volver a llamar a la función con la sublista del lado derecho (list,mid+1,sup)
-        MergeSort(list, mid + 1, sup);
+        mergeSort(list,mid+1,sup);
 
         // Ocurre la magia - Juntar la sublista izquierda con la sublista derecha que ya estan ordenadas
         merge(list, inf, mid, sup);
     }
 }
-
 // Funcion para crear el vector O(n)
 template<class T>
 void  crearvector(vector<T> &lista , int size){
@@ -425,12 +408,12 @@ int main(){
         else if(option == 'g'){
             vector<string> nuevalistastr= listastr;
             startTime(begin);
-            MergeSort(nuevalistastr , 0 , nuevalistastr.size() );
+            mergeSort(nuevalistastr , 0 , nuevalistastr.size()-1 );
             getTime(begin , end);
             printList(nuevalistastr);
             vector<int> nuevalistaint= listaint;
             startTime(begin);
-            MergeSort(nuevalistaint , 0 , nuevalistaint.size());
+            mergeSort(nuevalistaint , 0 , nuevalistaint.size()-1);
             getTime(begin , end);
             printList(nuevalistaint);
         }
