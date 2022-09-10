@@ -8,6 +8,7 @@
 #include <vector>
 using namespace std;
 
+//obtiene el tiempo con el que inicia
 void startTime(chrono::high_resolution_clock::time_point &begin)
 {
   // start time
@@ -15,8 +16,89 @@ void startTime(chrono::high_resolution_clock::time_point &begin)
   
 }
 
+// Imprime el tiempo transcurrido desde el valor de start hasta el momento que se ejecuta la función
+void getTime(chrono::high_resolution_clock::time_point begin, chrono::high_resolution_clock::time_point end) 
+{
+    end = std::chrono::high_resolution_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+
+    printf("Tiempo de ejecución: %.8f seconds.\n", elapsed.count() * 1e-9);
+}
+
+template<class T> 
+//Busqueda secuencial O(n)
+void sequencialSearch(vector<T> list, T n) {
+    for(int i = 0; i < list.size(); i++) {
+        if (n == list[i]) {
+            cout<<n<<" esta en la posicion:"<<i<<endl;
+        }
+        else if(i>=list.size()){cout<<"no esta en la lista"<<endl;}
+    }
+}
+
+//Busquedabinaria O(log2(n))
 template <class T>
-void  Bubble_sort(vector<T> &list){
+void  busquedaBinaria(vector<T> list, T x)
+{
+  int size = list.size();
+  int key;
+  int left =0; 
+  int right = size-1;
+  while (left<=right){
+    key = left + (right -left)/2;
+    if (list[key]==x ){
+      cout<<x <<"esta en la posicion"<<key<<endl; 
+      break;
+    }
+    else if (x<list[key]){
+      right=key-1; 
+    }
+    else if (x>list[key]) {
+      left=key+1;
+    }
+    else{
+        cout<<"no esta en la lista"<<endl;
+        break;
+    }
+  }
+}
+
+
+//Swap O(1)
+template <class T>
+void swap(vector<T> &list, int a, int b)
+{
+    if (a != b)
+    {
+        T aux = list[a];
+        list[a] = list[b];
+        list[b] = aux;
+    }
+}
+
+//swap sort O(n^2)
+template<class T>
+void swapSort(vector<T> &list){
+    int comparisons , swaps;
+   for(int i = 0 ; i<list.size()-1;i++){
+      for(int j = i+1 ; j<list.size();j++){
+         comparisons++;
+         if(list[i]>list[j]){
+            T item = list[i];
+            list[i]=list[j];
+            list[j]= item;
+            swaps++;
+         }
+      }
+   }
+   cout<<endl<<"comparasiones: "<<comparisons<<" Intercambios: "<<swaps<<endl;
+
+};
+
+template <class T>
+
+// Bubble sort O(n^2)
+void  buubleSort(vector<T> &list){
     int swaps= 0; int comparisons = 0;
    for(int i = 0; i <list.size()-1; i++){
        for(int j = 0 ; j<list.size()-i-1; j++){
@@ -34,17 +116,51 @@ void  Bubble_sort(vector<T> &list){
    }
    cout<<endl<<"comparasiones: "<<comparisons<<" Intercambios: "<<swaps<<endl;
 }
-// Intercambio de dos elementos de la lista
+
+//Selection sort O(n^2)
 template <class T>
-void swap(vector<T> &list, int a, int b)
-{
-    if (a != b)
-    {
-        T aux = list[a];
-        list[a] = list[b];
-        list[b] = aux;
+void selectionSort(vector<T> &list){
+     int swaps= 0; int comparisons = 0;
+   for(int i = 0 ; i<=list.size()-1;i++){
+        T item = list[i];
+        T lowest = list[i];
+        int index = i;
+        for(int j = i ; j<=list.size() -1; j++){
+            comparisons++;
+           if(list[j]<lowest){
+               swaps++;
+               index = j;
+               lowest = list[j];
+          }
+        }
+
+        list[index] = list [i];
+        list [i]= lowest;
+
     }
+        cout<<endl;
+   cout<<endl<<"comparasiones: "<<comparisons<<" Intercambios: "<<swaps<<endl;
 }
+
+//InsertionSort O(n^2)
+template <class T>
+void insertionSort(vector<T> &list){
+    int swaps= 0; int comparisons = 0;
+   for(int i = 1; i<= list.size()-1;i++){
+      T key = list[i];
+      int j = i-1;
+      while (j>=0 && list[j]>key) {
+        comparisons++;
+         list[j+1]=list[j];
+         j--;
+      }
+      list[j+1]=key;
+          swaps++;
+   }
+   cout<<endl<<"comparasiones: "<<comparisons<<" Intercambios: "<<swaps<<endl;
+}
+
+// get the pivot for the Quick sort  O(n)
 template <class T>
 int getPivot(vector<T> &list, int start, int end)
 {
@@ -76,6 +192,7 @@ int getPivot(vector<T> &list, int start, int end)
     return auxIndex;
 }
 
+//Quick sort O(log2(n))
 template <class T>
 void quickSort(vector<T> &list, int start, int end)
 {
@@ -91,47 +208,7 @@ void quickSort(vector<T> &list, int start, int end)
     }
 }
 
-template <class T>
-void Selection_sort(vector<T> &list){
-     int swaps= 0; int comparisons = 0;
-   for(int i = 0 ; i<=list.size()-1;i++){
-        T item = list[i];
-        T lowest = list[i];
-        int index = i;
-        for(int j = i ; j<=list.size() -1; j++){
-            comparisons++;
-           if(list[j]<lowest){
-               swaps++;
-               index = j;
-               lowest = list[j];
-          }
-        }
-
-        list[index] = list [i];
-        list [i]= lowest;
-
-    }
-        cout<<endl;
-   cout<<endl<<"comparasiones: "<<comparisons<<" Intercambios: "<<swaps<<endl;
-}
-
-template <class T>
-void InsertionSort(vector<T> &list){
-    int swaps= 0; int comparisons = 0;
-   for(int i = 1; i<= list.size()-1;i++){
-      T key = list[i];
-      int j = i-1;
-      while (j>=0 && list[j]>key) {
-        comparisons++;
-         list[j+1]=list[j];
-         j--;
-      }
-      list[j+1]=key;
-          swaps++;
-   }
-   cout<<endl<<"comparasiones: "<<comparisons<<" Intercambios: "<<swaps<<endl;
-}
-
+// imprimir la lista O(n)
 template <class T>
 void printList(vector<T> &list) {
     for (auto el : list) {
@@ -139,6 +216,8 @@ void printList(vector<T> &list) {
     }
     cout << endl;
 }
+
+//funcion merge para el merge sort O(n)
 template <class T>
 void merge(vector<T> &list, int inf, int mid, int sup)
 {
@@ -221,6 +300,7 @@ void merge(vector<T> &list, int inf, int mid, int sup)
     }
 }
 
+//Merge Sort O(nlogn)
 template <class T>
 void MergeSort(vector<T> &list, int inf, int sup)
 {
@@ -240,33 +320,8 @@ void MergeSort(vector<T> &list, int inf, int sup)
         merge(list, inf, mid, sup);
     }
 }
-template<class T>
-void Swapsort(vector<T> &list){
-    int comparisons , swaps;
-   for(int i = 0 ; i<list.size()-1;i++){
-      for(int j = i+1 ; j<list.size();j++){
-         comparisons++;
-         if(list[i]>list[j]){
-            T item = list[i];
-            list[i]=list[j];
-            list[j]= item;
-            swaps++;
-         }
-      }
-   }
-   cout<<endl<<"comparasiones: "<<comparisons<<" Intercambios: "<<swaps<<endl;
 
-};
-
-
-// Imprime el tiempo transcurrido desde el valor de start hasta el momento que se ejecuta la función
-void getTime(chrono::high_resolution_clock::time_point begin, chrono::high_resolution_clock::time_point end) 
-{
-    end = std::chrono::high_resolution_clock::now();
-    auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-
-    printf("Tiempo de ejecución: %.8f seconds.\n", elapsed.count() * 1e-9);
-}
+// Funcion para crear el vector O(n)
 template<class T>
 void  crearvector(vector<T> &lista , int size){
     T elemento;
@@ -277,41 +332,6 @@ void  crearvector(vector<T> &lista , int size){
     }
 }
 
-template<class T>
-void sequencialSearch(vector<T> list, T n) {
-    for(int i = 0; i < list.size(); i++) {
-        if (n == list[i]) {
-            cout<<n<<" esta en la posicion:"<<i<<endl;
-        }
-        else if(i>=list.size()){cout<<"no esta en la lista"<<endl;}
-    }
-}
-
-template <class T>
-void  busquedaBinaria(vector<T> list, T x)
-{
-  int size = list.size();
-  int key;
-  int left =0; 
-  int right = size-1;
-  while (left<=right){
-    key = left + (right -left)/2;
-    if (list[key]==x ){
-      cout<<x <<"esta en la posicion"<<key<<endl; 
-      break;
-    }
-    else if (x<list[key]){
-      right=key-1; 
-    }
-    else if (x>list[key]) {
-      left=key+1;
-    }
-    else{
-        cout<<"no esta en la lista"<<endl;
-        break;
-    }
-  }
-}
 
 int main(){
     srand(time(0));
