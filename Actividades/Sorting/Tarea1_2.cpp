@@ -432,12 +432,12 @@ int main(){
         else if(option == 'i'){
             vector<string> nuevalistastr= listastr;
             startTime(begin);
-            quickSort(nuevalistastr, 0, nuevalistastr.size());
+            quickSort(nuevalistastr, 0, nuevalistastr.size()-1);
             getTime(begin , end);
             printList(nuevalistastr);
             vector<int> nuevalistaint= listaint;
             startTime(begin);
-            quickSort(nuevalistaint , 0 , nuevalistaint.size());
+            quickSort(nuevalistaint , 0 , nuevalistaint.size()-1);
             getTime(begin , end);
             printList(nuevalistaint);
         }
