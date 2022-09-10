@@ -332,13 +332,14 @@ void  crearvector(vector<T> &lista , int size){
     }
 }
 
-
+//menu principal O(n)
 int main(){
     srand(time(0));
     chrono::high_resolution_clock::time_point begin;
     chrono::high_resolution_clock::time_point end;
     vector<string> listastr;
     vector<int> listaint;
+
 
     while (true) {
         char option;
@@ -386,12 +387,12 @@ int main(){
         else if(option == 'd'){
             vector<string> nuevalistastr= listastr;
             startTime(begin);
-            Bubble_sort(nuevalistastr);
+            buubleSort(nuevalistastr);
             getTime(begin , end);
             printList(nuevalistastr);
             vector<int> nuevalistaint= listaint;
             startTime(begin);
-            Bubble_sort(nuevalistaint);
+            buubleSort(nuevalistaint);
             getTime(begin , end);
             printList(nuevalistaint);
 
@@ -399,12 +400,12 @@ int main(){
         else if(option == 'e'){
             vector<string> nuevalistastr= listastr;
             startTime(begin);
-            Selection_sort(nuevalistastr);
+            selectionSort(nuevalistastr);
             getTime(begin , end);
             printList(nuevalistastr);
             vector<int> nuevalistaint= listaint;
             startTime(begin);
-            Selection_sort(nuevalistaint);
+            selectionSort(nuevalistaint);
             getTime(begin , end);
             printList(nuevalistaint);
 
@@ -412,12 +413,12 @@ int main(){
         else if(option == 'f'){
             vector<string> nuevalistastr= listastr;
             startTime(begin);
-            InsertionSort(nuevalistastr);
+            insertionSort(nuevalistastr);
             getTime(begin , end);
             printList(nuevalistastr);
             vector<int> nuevalistaint= listaint;
             startTime(begin);
-            InsertionSort(nuevalistaint);
+            insertionSort(nuevalistaint);
             getTime(begin , end);
             printList(nuevalistaint);
         }
@@ -436,12 +437,12 @@ int main(){
         else if(option == 'h'){
             vector<string> nuevalistastr= listastr;
             startTime(begin);
-            Swapsort(nuevalistastr);
+            swapSort(nuevalistastr);
             getTime(begin , end);
             printList(nuevalistastr);
             vector<int> nuevalistaint= listaint;
             startTime(begin);
-            MergeSort(nuevalistaint , 0 , nuevalistaint.size());
+            swapSort(nuevalistaint);
             getTime(begin , end);
             printList(nuevalistaint);
         }
