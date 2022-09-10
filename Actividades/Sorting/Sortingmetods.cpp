@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdlib>
 using namespace std;
+
 template <class T>
 void  Bubble_sort(vector<T> &list){
    for(int i = 0; i <list.size()-1; i++){
@@ -18,6 +19,12 @@ void  Bubble_sort(vector<T> &list){
    for(int i = 0 ; i<= list.size(); i++){
       cout<<list[i]<<" ";
    }
+}
+
+template <class T> 
+void Quick_sort(vector<T> &list , int start , int end){
+   
+
 }
 
 
