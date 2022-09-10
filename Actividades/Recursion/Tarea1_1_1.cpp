@@ -3,12 +3,12 @@
 #include <iterator>
 using namespace std;
 // fibonachi
-int fibonacchi_recursivo(int n, int lastnumber =0  , int numberbefore= 1 ){
+int fibonachiRecursivo(int n, int lastnumber =0  , int numberbefore= 1 ){
     if(n>0){
         int x = lastnumber;
         lastnumber = lastnumber+numberbefore;
         numberbefore = x;
-        return fibonacchi_recursivo(n-1 , lastnumber , numberbefore );
+        return fibonachiRecursivo(n-1 , lastnumber , numberbefore );
     }
     else {        
         return lastnumber;
@@ -16,7 +16,7 @@ int fibonacchi_recursivo(int n, int lastnumber =0  , int numberbefore= 1 ){
     }
 
 }
-int fibonacchi_iterativo(int n){
+int fibbonachiIterativo(int n){
     int lastnumber= 0 ;
     int numberbefore = 1;
     for (int i = 0 ;i<n ;i++){
@@ -29,15 +29,15 @@ int fibonacchi_iterativo(int n){
 
 // Bacterias 
 
-float bacteriarecursiva(int n , float bacterias = 1){
+float bacteriasRecursiva(int n , float bacterias = 1){
     if(n> 0){
-        return bacteriarecursiva(n-1 ,bacterias*(1+3.78-2.34));
+        return bacteriasRecursiva(n-1 ,bacterias*(1+3.78-2.34));
     }
     else{
         return truncf(bacterias);
     };
 }
-float bacteriaiterativa(int n){
+float bacteriasIterativas(int n){
     float bacterias = 1;
     for(int i = 0 ; i<n ;i++){
         bacterias=bacterias*(1+3.78-2.34);
@@ -85,17 +85,17 @@ int potenciaIterativa(int x , int y){
 int main(){
     // llamar fibonachi con 10 iteraciones
     cout<<"fibonachi recursivo: ";
-    cout<<fibonacchi_recursivo(10);
+    cout<<fibonachiRecursivo(10);
     cout<<endl;
     cout<<"fibonachi iterativo: ";
-    cout<<fibonacchi_iterativo(10);
+    cout<<fibbonachiIterativo(10);
     cout<<endl;
     // llamar funciones bacterias con 10 dias
     cout<<"bacteria recursiva: ";
-    cout<<bacteriarecursiva(10);
+    cout<<bacteriasRecursiva(10);
     cout<<endl;
     cout<<"bacteria iterativa: ";
-    cout<<bacteriaiterativa(10);
+    cout<<bacteriasIterativas(10);
     cout<<endl;
     // llamar interes compuesto con 10 meses con 10000 pesos 
     cout<<"inversion recursiva: ";
