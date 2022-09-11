@@ -134,13 +134,11 @@ string  setkeyitem(vector<T> list , int key){
 
 vector<Log> busquedaBinaria(vector<Log> list, string x)
 {
-    cout<<endl;
   int size = list.size();
   vector<Log> searchedItemList;
   int key;
   int left =0; 
   int right = size-1;
-  vector<int> indexes;
   while (left<=right){
     key = left + (right -left)/2;
     string keyitem = setkeyitem(list, key);
@@ -195,11 +193,11 @@ int main()
     
     quickSort(logs, 0, logs.size()-1);
     printLogs(logs);
+
     string elementoABuscar;
     cout<<"que elemento quieres buscar (primeras 3 letras de la ubicacion)"<<endl;
     cin>>elementoABuscar;
     vector<Log> resultados = busquedaBinaria(logs, elementoABuscar);
-    printLogs(resultados);
     cout<<endl<<endl<<endl;
     quickSortDate(resultados, 0, resultados.size()-1);
     printLogs(resultados);
