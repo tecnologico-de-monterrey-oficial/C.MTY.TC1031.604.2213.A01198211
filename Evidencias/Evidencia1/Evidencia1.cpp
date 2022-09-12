@@ -44,6 +44,7 @@ int getPivot(vector<T> &list, int start, int end , string type) {
         // else
             // no vamos a hacer nada
         }
+        // <= es el nuevo operador para que cheque la fecha y no el key (checa log.h)
         else if (type == "date" && list[index]<=pivot) {
             // si es menor
             // incrementamos el valor de auxIndex
@@ -96,6 +97,7 @@ vector<string> split(string str, char pattern) {
 template<class T>
 string  setkeyitem(vector<T> list , int key){
     string keyitem ;
+    // saca las primeras 3 letras de la ubi
     for(int  i= 0 ; i<=2 ; i++){
         keyitem = keyitem + list[key].ubi[i];
     }
@@ -112,22 +114,25 @@ vector<Log> busquedaBinaria(vector<Log> list, string x)
   int right = size-1;
   while (left<=right){
     key = left + (right -left)/2;
+    // saca el key item que son las primeras 3 letras de la ubi
     string keyitem = setkeyitem(list, key);
+
+    // checa si si es igual 
     if (keyitem==x ){
         searchedItemList.push_back(list[key]);
+        // quita la ubi para que no lo vuelva a llamar
         list[key].ubi="";
+        // abre left y right para que busque en sus alrededores por repetidos
         right = key+2;
         left=key-3;
     }
+    // si es menor 
     else if (x<keyitem){
       right=key-1; 
     }
+    // si es mayor que
     else if (x>keyitem) {
       left=key+1;
-    }
-    else{
-        cout<<"no esta en la lista"<<endl;
-        break;
     }
   }
   return searchedItemList;
