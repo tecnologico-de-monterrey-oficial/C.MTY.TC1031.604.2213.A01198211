@@ -25,46 +25,8 @@ void printLogs(vector<Log> logs) {
 }
 
 
-int getPivotDate(vector<Log> &list, int start, int end) {
-    // Opción 2 (Sin listas temporales)
-    // Identificamos el pivote (El último elemento de la lista)
-    int pivot = list[end].formatedDate;
-    // Creamos un indice auxiliar igual a start -1 (auxIndex)
-    int auxIndex = start - 1;
-    // Recorremos toda la lista desde start hasta end - 1 (index)
-    for (int index=start; index<=end-1; index++) {
-        // Validamos si el valor de la lista en index es menor al pivot
-        if (list[index].formatedDate<pivot) {
-            // si es menor
-            // incrementamos el valor de auxIndex
-            auxIndex++;
-            // intercambiamos en la lista auxIndex con index
-            swap(list, auxIndex, index);
-        // else
-            // no vamos a hacer nada
-        }
-    }
-    // incrementamos el valor de auxIndex
-    auxIndex++;
-    // intercambiamos auxIndex con el pivot(end)
-    swap(list, auxIndex, end);
-    // regresar el valor de auxIndex
-    return auxIndex;
-}
-
-void quickSortDate(vector<Log> &list, int start, int end) {
-    // Condición de control mientras start < end
-    if (start < end) {
-        // Encontrar el pivote y hacer las dos listas
-        int pivot = getPivotDate(list, start, end);
-        // Ordenamos la lista del lado izquierdo
-        quickSortDate(list, start, pivot - 1);
-        // Ordenamos la lista del lado derecho
-        quickSortDate(list, pivot + 1, end);
-    }
-}
 template <class T>
-int getPivot(vector<T> &list, int start, int end) {
+int getPivot(vector<T> &list, int start, int end , string type) {
     // Opción 2 (Sin listas temporales)
     // Identificamos el pivote (El último elemento de la lista)
     T pivot = list[end];
@@ -73,7 +35,16 @@ int getPivot(vector<T> &list, int start, int end) {
     // Recorremos toda la lista desde start hasta end - 1 (index)
     for (int index=start; index<=end-1; index++) {
         // Validamos si el valor de la lista en index es menor al pivot
-        if (list[index]<pivot) {
+        if (type == "key" && list[index]<pivot) {
+            // si es menor
+            // incrementamos el valor de auxIndex
+            auxIndex++;
+            // intercambiamos en la lista auxIndex con index
+            swap(list, auxIndex, index);
+        // else
+            // no vamos a hacer nada
+        }
+        else if (type == "date" && list[index]<=pivot) {
             // si es menor
             // incrementamos el valor de auxIndex
             auxIndex++;
@@ -92,15 +63,15 @@ int getPivot(vector<T> &list, int start, int end) {
 }
 
 template <class T>
-void quickSort(vector<T> &list, int start, int end) {
+void quickSort(vector<T> &list, int start, int end , string type) {
     // Condición de control mientras start < end
     if (start < end) {
         // Encontrar el pivote y hacer las dos listas
-        int pivot = getPivot(list, start, end);
+        int pivot = getPivot(list, start, end, type);
         // Ordenamos la lista del lado izquierdo
-        quickSort(list, start, pivot - 1);
+        quickSort(list, start, pivot - 1 , type);
         // Ordenamos la lista del lado derecho
-        quickSort(list, pivot + 1, end);
+        quickSort(list, pivot + 1, end, type);
     }
 }
 
@@ -179,6 +150,7 @@ int main()
     
     // Recorremos todo el archivo para crear agregar los renglones al vector
     while (file >> date >> time >> entry >> ubi) {
+        // creamos new date y cambiamos el año por el dia
         vector<string> sDate;
         sDate = split(date, '-');        
         swap(sDate , 0 , 2);
@@ -186,20 +158,28 @@ int main()
         for (int i = 0; i<= 2; i++) {
           formatedDate=formatedDate+sDate[i];
         } 
+
+        //agregamos los datos a un nuevo log y luego al vector 
         
         Log log(date, stoi(formatedDate) , time, entry, ubi);
         logs.push_back(log);
     };
     
-    quickSort(logs, 0, logs.size()-1);
+    // ordenamiento por ubi + fecha
+    quickSort(logs, 0, logs.size()-1 , "key");
     printLogs(logs);
 
+    // pedir elemento a buscar
     string elementoABuscar;
     cout<<"que elemento quieres buscar (primeras 3 letras de la ubicacion)"<<endl;
     cin>>elementoABuscar;
+
+    // busqueda binaria
     vector<Log> resultados = busquedaBinaria(logs, elementoABuscar);
     cout<<endl<<endl<<endl;
-    quickSortDate(resultados, 0, resultados.size()-1);
+
+    // quick sort date
+    quickSort(resultados, 0, resultados.size()-1, "date");
     printLogs(resultados);
 
 
