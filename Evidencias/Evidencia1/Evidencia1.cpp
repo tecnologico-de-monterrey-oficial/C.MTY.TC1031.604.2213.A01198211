@@ -27,6 +27,7 @@ void printLogs(vector<Log> logs) {
 
 template <class T>
 int getPivot(vector<T> &list, int start, int end , string type) {
+    
     // Opción 2 (Sin listas temporales)
     // Identificamos el pivote (El último elemento de la lista)
     T pivot = list[end];
