@@ -17,6 +17,13 @@ int main()
     } catch(out_of_range &e) {
         cout << e.what() << endl;
     }
+    try{
+        string aux = list.getData(2);
+        cout<<"el valor de la posicion 2 es"<<aux<<endl;
+    }
+    catch(out_of_range&error){
+        
+    }
     list[0] = "X";
     cout << list[0] << endl;
 

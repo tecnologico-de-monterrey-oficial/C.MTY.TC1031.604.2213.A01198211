@@ -14,8 +14,8 @@ public:
     void append(T data); // Agrega un elemento al final de la lista
     void appendLeft(T data); // Agrega un elemento al principio de la lista
     int findData(T data); // * Regresa el indice donde se encontruentra el valor buscado
-    T getData(int index); // * Regresa el valor que se encuentra en el índice dado
-    T operator[](int index); // ** Regresa el valor que se encuentra en el índice dado
+    T& getData(int index); // * Regresa el valor que se encuentra en el índice dado
+    T& operator[](int index); // ** Regresa el valor que se encuentra en el índice dado
     void insert(int index, T data); // *Inserta un elemento después del índice dado
     void deleteAt(int index); // *Elimina un elemento en el índice dado
     void deleteData(T data); // *Elimina el elemento dado (El primero que encuentre)
@@ -91,6 +91,57 @@ void LinkedList<T>::insert(int index, T data) {
     }
 }
 
+template<class T>
+T&  LinkedList<T>::getData(int index){
+    // validamos que el indice sea valido
+    if(index>=0 && index<size){
+        //buscar el indice
+        // crear un apuntador auxiliar que apunte a head
+        
+        Node<T>* aux = head;
+        // crear un indice auxiliar que sea igual a 0;
+        int auxIndex=0;
+        //Recorrer la lista
+        while(auxIndex<index){
+            // incrementamos el indice auxiliar
+            auxIndex++;
+            //Recorrer el apuntador
+            aux=aux->next;
+        }
+        return aux->data;
+
+    }
+    else {
+        throw out_of_range("el indice es invalido");
+    }
+
+}
+
+template<class T>
+T&  LinkedList<T>::operator[](int index){
+    // validamos que el indice sea valido
+    if(index>=0 && index<size){
+        //buscar el indice
+        // crear un apuntador auxiliar que apunte a head
+        
+        Node<T>* aux = head;
+        // crear un indice auxiliar que sea igual a 0;
+        int auxIndex=0;
+        //Recorrer la lista
+        while(auxIndex<index){
+            // incrementamos el indice auxiliar
+            auxIndex++;
+            //Recorrer el apuntador
+            aux=aux->next;
+        }
+        return aux->data;
+
+    }
+    else {
+        throw out_of_range("el indice es invalido");
+    }
+
+}
 template<class T>
 void LinkedList<T>::print() {
     // Recorrer la lista de head hasta que el puntador al siguiente nodo sea igual a nulo
