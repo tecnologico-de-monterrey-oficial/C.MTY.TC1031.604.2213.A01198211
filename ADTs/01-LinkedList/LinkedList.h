@@ -143,6 +143,33 @@ T&  LinkedList<T>::operator[](int index){
 
 }
 template<class T>
+void LinkedList<T>::deleteAt(int index){
+    if (index>=0 &&index<size){
+        Node<T>*aux=head;
+        int auxindex= 0;
+        if(index==0){
+            head=head->next;
+            delete aux;
+
+        }
+        else {
+            Node<T>* prev=nullptr;
+            aux=aux->next;
+            auxindex=1;
+            while(auxindex<index){
+                auxindex++;
+                prev=aux;
+                aux=aux->next;
+            }
+            prev->next=aux->next;
+            delete aux;
+            
+        }
+
+    }
+    
+}
+template<class T>
 void LinkedList<T>::print() {
     // Recorrer la lista de head hasta que el puntador al siguiente nodo sea igual a nulo
     // imprimir nodo por nodo

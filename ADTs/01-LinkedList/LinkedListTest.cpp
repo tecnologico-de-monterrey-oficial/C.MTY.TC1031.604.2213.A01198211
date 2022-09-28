@@ -28,6 +28,13 @@ int main()
     cout << list[0] << endl;
 
     list.print();
+    try{
+        list.deleteAt(2);
+        list.print();
+    }
+    catch(out_of_range &error){
+        cout<<error.what()<<endl;
+    }
 
     
     
