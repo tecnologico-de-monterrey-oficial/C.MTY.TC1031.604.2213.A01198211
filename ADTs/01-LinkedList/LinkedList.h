@@ -3,6 +3,10 @@
 
 
 #include "Node.h"
+#include <cstddef>
+#include <iostream>
+
+using namespace std;
 
 template<class T>
 class LinkedList {
@@ -169,6 +173,33 @@ void LinkedList<T>::deleteAt(int index){
     }
     
 }
+
+template<class T>
+void LinkedList<T>::deleteData(T data){
+    Node<T>*aux = head;
+    int auxIndex = 0;
+    if(size == 0){
+        cout<<"tu lista no tiene datos"<<endl;
+    }
+    else if(size == 1 && aux->data == data){
+        aux = nullptr;
+        delete aux;
+    }
+    else{
+        Node<T>* prev = nullptr;
+        aux = aux->next;
+        auxIndex = 1;
+        while(auxIndex<size && aux->data != data){
+           auxIndex++;
+           prev = aux;
+           aux = aux->next;
+        }
+        prev->next = aux->next;
+        delete aux;
+    }
+    
+}
+
 template<class T>
 void LinkedList<T>::print() {
     // Recorrer la lista de head hasta que el puntador al siguiente nodo sea igual a nulo

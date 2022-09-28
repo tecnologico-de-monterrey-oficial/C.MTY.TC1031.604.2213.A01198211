@@ -35,6 +35,13 @@ int main()
     catch(out_of_range &error){
         cout<<error.what()<<endl;
     }
+    try{
+        list.deleteData("C");
+        list.print();
+    }
+    catch(out_of_range &error){
+        cout<<error.what()<<endl;
+    }
 
     
     
