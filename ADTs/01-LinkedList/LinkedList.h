@@ -200,6 +200,7 @@ void LinkedList<T>::deleteData(T data){
     
 }
 
+
 template<class T>
 void LinkedList<T>::print() {
     // Recorrer la lista de head hasta que el puntador al siguiente nodo sea igual a nulo
