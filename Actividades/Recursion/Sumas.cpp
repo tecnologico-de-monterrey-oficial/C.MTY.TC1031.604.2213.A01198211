@@ -12,14 +12,11 @@ int suma_Iterativa(int n){
 
 int suma_Recursiva(int n, int sum = 0,int count = 1){
     if(count<=n){
-        suma_Recursiva(n , sum+count , count+1);
-        
+        return suma_Recursiva(n , sum+count , count+1);
     }
     else{
         return sum;
     }
-
-    
 }
 int suma_Directa(int n){
     int sum = n*(n+1)/2;
