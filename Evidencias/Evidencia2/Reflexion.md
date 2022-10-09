@@ -1,0 +1,3 @@
+## Reflexion de por que necesitamos listas doble enlazadas 
+
+Para los logs de los botes, el usar estas listas doblemente enlazadas es algo muy inteligente, ya que no siempre vas a necesitar sacar un dato muy especifico. Normalmente vas a necesitar los ultimos datos, Asi que el usar una lista doblemente enlazada en vez de una enlazada nos ayuda en eso ya que nos da la variable tail ya ahi mismo. Y si por alguna razon necesitas el de hace una semana, es mas eficiente contar desde el ultimo para atras que desde el primer dato para adelante, dandole mas eficiencia al codigo y haciendolo mas facil para la computadora que lo corra.

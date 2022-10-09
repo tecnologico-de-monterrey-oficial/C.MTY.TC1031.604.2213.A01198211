@@ -129,7 +129,7 @@ void DoubleLinkedList<T>::print() {
     // ciclo mientras el puntador next de aux sea diferente de nulo
     while (aux != nullptr) {
         // Imprimimos el valor del nodo
-        cout << aux->data << " ";
+        cout << aux->data << endl;
         // Recorremos aux al siguiente nodo
         aux = aux->next;
     }

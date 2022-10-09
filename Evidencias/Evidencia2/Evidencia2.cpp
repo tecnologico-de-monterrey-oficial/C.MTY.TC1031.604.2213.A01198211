@@ -118,11 +118,16 @@ DoubleLinkedListE busquedaBinaria(DoubleLinkedListE& list, string x)
     // checa si si es igual 
     if (keyitem==x ){
         searchedItemList.append(&list[key]);
-        // quita la ubi para que no lo vuelva a llamar
-        list[key].ubi="";
-        // abre left y right para que busque en sus alrededores por repetidos
-        right = key+2;
-        left=key-3;
+        if (key != list.Size()-1){
+            // quita la ubi para que no lo vuelva a llamar
+            list[key].ubi="";
+            // abre left y right para que busque en sus alrededores por repetidos
+            right = key+2;
+            left=key-3;
+        }
+        else {
+            break;
+        }
     }
     // si es menor 
     else if (x<keyitem){
@@ -164,18 +169,21 @@ int main(){
   }
 
   // ordenar los datos con el quicksort
+
   quickSort(Mediterraneo, 0,Mediterraneo.Size());
   quickSort(Rojo, 0,Rojo.Size());
+
   cout<<"MEDITERRANEO: "<<endl;
   Mediterraneo.print();
   cout<<"ROJO: "<<endl;
   Rojo.print();
+  cout<<Rojo.Size()<<endl;
 
   // busqueda binaria
   string elementoABuscar;
   cout<<"escriba que elemento quiere buscar"<<endl;
   cin>>elementoABuscar;
-  DoubleLinkedListE elementosEncontradosM= busquedaBinaria(Mediterraneo, elementoABuscar);
+ DoubleLinkedListE elementosEncontradosM= busquedaBinaria(Mediterraneo, elementoABuscar);
   DoubleLinkedListE elementosEncontradosR= busquedaBinaria(Rojo, elementoABuscar);
   // importar todas a una sola lista
   
@@ -190,38 +198,36 @@ int main(){
       total.append(&elementosEncontradosM[i]);
     }
   }
+  // quick sort de los elementos por mes y luego por año
   quickSortF(total, 0, total.Size());
-  total.print();
-  // for loop para sacar fechas repetidas
-  int index= 0  ; int j = 0;
+
+  // declaracion de variables para el output
+  int index= 0  ; int Count= 0;
   int cElementosM = 0; int cElementosR = 0;
 
   string meses[13] = {"","Jan" , "Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug ", "Sep", "Oct", "Nov", "Dec"};
+    // while loop que saca los oputputs
+    //
 
-  while(j<total.Size()){
+  while(Count<total.Size()){
     string fechaABuscar = total[index].mes + " " + total[index].año;
-    if (total[j].mes + " " + total[j].año == fechaABuscar){
-      if(total[j].puntoEntrada=="M"){
+    if (total[Count].mes + " " + total[Count].año == fechaABuscar){
+      if(total[Count].puntoEntrada=="M"){
         cElementosM++;
       }
       else {
         cElementosR++;
       }
-        j++;
+        Count++;
     }
     else {
      cout<<meses[stoi(total[index].mes)] <<" "<< total[index].año <<" M "<<cElementosM<<" R "<<cElementosR<<endl;
-      index = j;
+      index = Count;
       cElementosM= 0;
       cElementosR= 0;
     }
   }
+  // ultimo output que no se pone en el while
  cout<<meses[stoi(total[index].mes)] <<" "<< total[index].año <<" M "<<cElementosM<<" R "<<cElementosR<<endl;
+    }
 
-
-
-
-
-
-  
-}
