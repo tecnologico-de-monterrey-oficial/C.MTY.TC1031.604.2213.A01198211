@@ -172,13 +172,6 @@ int main(){
 
   quickSort(Mediterraneo, 0,Mediterraneo.Size());
   quickSort(Rojo, 0,Rojo.Size());
-
-  cout<<"MEDITERRANEO: "<<endl;
-  Mediterraneo.print();
-  cout<<"ROJO: "<<endl;
-  Rojo.print();
-  cout<<Rojo.Size()<<endl;
-
   // busqueda binaria
   string elementoABuscar;
   cout<<"escriba que elemento quiere buscar"<<endl;
