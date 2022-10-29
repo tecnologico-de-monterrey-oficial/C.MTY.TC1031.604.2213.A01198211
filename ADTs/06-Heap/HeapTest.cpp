@@ -1,10 +1,19 @@
 #include "Heap.h"
 #include "minHeap.h"
+#include <cmath>
 #include <iostream>
 #include <string>
 #include <vector>
 
 using namespace std;
+
+template <class T> vector<T> SortH(Heap<T> heap) {
+  vector<T> newlist;
+  while (!heap.isEmpty()) {
+    newlist.pop_back(heap.getHead());
+    heap.pop();
+  }
+}
 
 int main() {
   vector<int> ejemplolista = {0, 1, 2, 10, 5, 4};

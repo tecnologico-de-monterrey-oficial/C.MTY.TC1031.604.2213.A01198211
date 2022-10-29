@@ -15,13 +15,36 @@ private:
   void upSort(int);
 
 public:
-  Heap();
-  Heap(vector<T>);
-  void append();
-  void push(T data);
-  void print();
-  int levelnumber();
+  Heap();            // inicializador vacio
+  Heap(vector<T>);   // inicializador con vector
+  void push(T data); // agregar un dato al final
+  void pop();        // borrar el primer dato
+  void print();      // imprimir resultado
+  int levelnumber(); // numero de niveles del arbol
+  int Size();        // tamaño del vector
+  T operator[](int); // operador para sacar el dato en X indice del vector
+  bool isEmpty();    // checa si esta vacio
+  T getHead();       // obtiene el dato en la cabeza
 };
+
+template <class T> bool Heap<T>::isEmpty() { return heap.size() == 0; };
+
+template <class T> T Heap<T>::getHead() {
+  if (!isEmpty()) {
+    return heap[0];
+  } else {
+    throw out_of_range("el heap esta vacio");
+  }
+}
+
+template <class T> void Heap<T>::pop() {
+  swap(0, heap.size() - 1);
+  heap.pop_back();
+  downSort(0);
+}
+
+template <class T> int Heap<T>::Size() { return heap.size(); }
+template <class T> T Heap<T>::operator[](int index) { return heap[index]; }
 
 template <class T> void Heap<T>::swap(int index1, int index2) {
   T aux = heap[index1];
@@ -55,8 +78,8 @@ template <class T> void Heap<T>::downSort(int father) {
     // checar si hay otro hijo
     if (father * 2 + 2 < heap.size()) {
       int son2 = father * 2 + 2;
-      // comparar hijo 1 y hijo 2 para ver cual es el mas grande (poner el valor
-      // de smallSon como el mas grande)
+      // comparar hijo 1 y hijo 2 para ver cual es el mas grande (poner el
+      // valor de smallSon como el mas grande)
       (heap[son1] > heap[son2]) ? smallSon = son1 : smallSon = son2;
 
     } else {
