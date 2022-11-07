@@ -1,35 +1,37 @@
-#ifndef HEAP_H_INCLUDED
-#define HEAP_H_INCLUDED
+#ifndef HEAPBL_H_INCLUDED
+#define HEAPBL_H_INCLUDED
+#include "BoatLog.h"
 #include <cmath>
 #include <iostream>
 #include <string.h>
 #include <string>
+#include <vector>
 
 using namespace std;
 
-template <class T> class Heap {
+class HeapBL {
 private:
-  vector<T> heap;
+  vector<BoatLog> heap;
   void swap(int, int);
   void downSort(int);
   void upSort(int);
 
 public:
-  Heap();            // inicializador vacio
-  Heap(vector<T>);   // inicializador con vector
-  void push(T data); // agregar un dato al final
-  void pop();        // borrar el primer dato
-  void print();      // imprimir resultado
-  int levelnumber(); // numero de niveles del arbol
-  int Size();        // tamaño del vector
-  T operator[](int); // operador para sacar el dato en X indice del vector
-  bool isEmpty();    // checa si esta vacio
-  T getHead();       // obtiene el dato en la cabeza
+  HeapBL();                // inicializador vacio
+  HeapBL(vector<BoatLog>); // inicializador con vector
+  void push(BoatLog data); // agregar un dato al final
+  void pop();              // borrar el primer dato
+  void print();            // imprimir resultado
+  int levelnumber();       // numero de niveles del arbol
+  int Size();              // tamaño del vector
+  BoatLog operator[](int); // operador para sacar el dato en X indice del vector
+  bool isEmpty();          // checa si esta vacio
+  BoatLog getTop();        // obtiene el dato en la cabeza
 };
 
-template <class T> bool Heap<T>::isEmpty() { return heap.size() == 0; };
+bool HeapBL::isEmpty() { return heap.size() == 0; };
 
-template <class T> T Heap<T>::getHead() {
+BoatLog HeapBL::getTop() {
   if (!isEmpty()) {
     return heap[0];
   } else {
@@ -37,21 +39,21 @@ template <class T> T Heap<T>::getHead() {
   }
 }
 
-template <class T> void Heap<T>::pop() {
+void HeapBL::pop() {
   swap(0, heap.size() - 1);
   heap.pop_back();
   downSort(0);
 }
 
-template <class T> int Heap<T>::Size() { return heap.size(); }
-template <class T> T Heap<T>::operator[](int index) { return heap[index]; }
+int HeapBL::Size() { return heap.size(); }
+BoatLog HeapBL::operator[](int index) { return heap[index]; }
 
-template <class T> void Heap<T>::swap(int index1, int index2) {
-  T aux = heap[index1];
+void HeapBL::swap(int index1, int index2) {
+  BoatLog aux = heap[index1];
   heap[index1] = heap[index2];
   heap[index2] = aux;
 }
-template <class T> Heap<T>::Heap(vector<T> list) {
+HeapBL::HeapBL(vector<BoatLog> list) {
   // copiar la lista actualizada al heap
   heap = list;
   // Encontrar cual es el primer nodo padre (((list.size()-1)-1)/2)
@@ -66,11 +68,9 @@ template <class T> Heap<T>::Heap(vector<T> list) {
   }
 };
 
-template <class T> int Heap<T>::levelnumber() {
-  return trunc(log2(heap.size()));
-};
+int HeapBL::levelnumber() { return trunc(log2(heap.size())); };
 
-template <class T> void Heap<T>::downSort(int father) {
+void HeapBL::downSort(int father) {
   // asegurarse que el padre tenga 1 hijo
   int smallSon;
   while (father * 2 + 1 < heap.size()) {
@@ -80,7 +80,7 @@ template <class T> void Heap<T>::downSort(int father) {
       int son2 = father * 2 + 2;
       // comparar hijo 1 y hijo 2 para ver cual es el mas grande (poner el
       // valor de smallSon como el mas grande)
-      (heap[son1] > heap[son2]) ? smallSon = son1 : smallSon = son2;
+      (heap[son1].key > heap[son2].key) ? smallSon = son1 : smallSon = son2;
 
     } else {
       // si solo hay un hijo, smallSon vale son1
@@ -88,7 +88,7 @@ template <class T> void Heap<T>::downSort(int father) {
     }
 
     // checar que el padre sea mayor que el hijo mas grande
-    if (heap[father] > heap[smallSon]) {
+    if (heap[father].key > heap[smallSon].key) {
       father = heap.size();
     } else {
       swap(father, smallSon);
@@ -97,10 +97,10 @@ template <class T> void Heap<T>::downSort(int father) {
   }
 }
 
-template <class T> void Heap<T>::upSort(int son) {
+void HeapBL::upSort(int son) {
   while (son != 0) {
     int father = (son - 1) / 2;
-    if (heap[son] > heap[father]) {
+    if (heap[son].key > heap[father].key) {
       swap(son, father);
       son = father;
     } else {
@@ -109,19 +109,19 @@ template <class T> void Heap<T>::upSort(int son) {
   }
 }
 
-template <class T> void Heap<T>::push(T data) {
+void HeapBL::push(BoatLog data) {
   heap.push_back(data);
   upSort(heap.size() - 1);
 }
 
-template <class T> Heap<T>::Heap() {}
+HeapBL::HeapBL() {}
 
-template <class T> void Heap<T>::print() {
+void HeapBL::print() {
   int counter = 0;
   for (int i = 0; i <= levelnumber(); i++) {
     for (int j = 1; j <= pow(2, i); j++) {
       if (counter < heap.size()) {
-        cout << heap[counter] << " ";
+        cout << heap[counter].key << " ";
         counter++;
       } else {
         break;

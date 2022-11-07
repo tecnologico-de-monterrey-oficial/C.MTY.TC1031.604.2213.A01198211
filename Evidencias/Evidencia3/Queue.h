@@ -2,6 +2,9 @@
 #define Queue_h
 
 #include "Node.h"
+#include <iostream>
+
+using namespace std;
 
 template <class T> class Queue {
 private:
@@ -60,7 +63,7 @@ template <class T> T Queue<T>::pop() {
     // regresamos auxData
     return auxData;
   } else {
-    throw out_of_range("La fila esta vacía");
+    throw std::out_of_range("La fila esta vacía");
   }
 }
 
@@ -69,7 +72,7 @@ template <class T> T Queue<T>::getFront() {
     // regresamos front->data
     return front->data;
   } else {
-    throw out_of_range("La fila esta vacía");
+    throw std::out_of_range("La fila esta vacía");
   }
 }
 
@@ -80,12 +83,12 @@ template <class T> void Queue<T>::print() {
   // ciclo mientras el puntador next de aux sea diferente de nulo
   while (aux != nullptr) {
     // Imprimimos el valor del nodo
-    cout << aux->data << " ";
+    std::cout << aux->data << " ";
     // Recorremos aux al siguiente nodo
     aux = aux->next;
   }
   // Saltamos una línea
-  cout << endl;
+  std::cout << std::endl;
 }
 
 template <class T> bool Queue<T>::isEmpty() { return size == 0; }

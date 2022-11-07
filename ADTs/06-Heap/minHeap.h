@@ -21,7 +21,9 @@ public:
   void push(T data);
   void print();
   int levelnumber();
+  T operator[](int index);
 };
+template <class T> T minHeap<T>::operator[](int index) { return heap[index]; }
 
 template <class T> void minHeap<T>::swap(int index1, int index2) {
   T aux = heap[index1];
