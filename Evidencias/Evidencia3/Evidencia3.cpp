@@ -47,7 +47,10 @@ void printlist(vector<BoatLog> list) {
 int main() {
   // declaracion de variables
   ifstream archivo;
-  archivo.open("canalsuez3.txt");
+  string fileName;
+  cout << "Escribe el nombre del archivo (canalsuez3.txt)";
+  std::cin >> fileName;
+  archivo.open(fileName);
 
   string fecha;
   string hora;
@@ -66,6 +69,7 @@ int main() {
       Rojo.push_back(*data);
     }
   }
+
   // creacion de listas para ordenar
   vector<BoatLog> MediterraneoOrdenadoAscendente = Mediterraneo;
   vector<BoatLog> RojoOrdenadoAscendente = Rojo;

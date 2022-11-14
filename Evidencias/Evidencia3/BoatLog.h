@@ -1,11 +1,11 @@
 #ifndef BoatLog_h
 #define BoatLog_h
-#include <string.h>
 #include <iostream>
+#include <string.h>
 
 using namespace std;
 
-struct BoatLog{
+struct BoatLog {
   string fecha;
   string hora;
   string puntoEntrada;
@@ -14,31 +14,25 @@ struct BoatLog{
   string mes;
   string año;
 
-  BoatLog(string ,string , string , string);
+  BoatLog(string, string, string, string);
   BoatLog();
 };
 
-BoatLog::BoatLog(string fecha , string hora , string puntoEntrada , string ubi)
-{
-  this->fecha=fecha;
+BoatLog::BoatLog(string fecha, string hora, string puntoEntrada, string ubi) {
+  this->fecha = fecha;
   this->hora = hora;
-  this-> puntoEntrada=puntoEntrada;
+  this->puntoEntrada = puntoEntrada;
   this->ubi = ubi;
-  this->key = ubi + " " + fecha + " " + hora + " "+ puntoEntrada;
-  this->mes = fecha.substr(3,2);
-  this->año = fecha.substr(6 , 2);
+  this->key = ubi + " " + fecha + " " + hora + " " + puntoEntrada;
+  this->mes = fecha.substr(3, 2);
+  this->año = fecha.substr(6, 2);
 }
-BoatLog::BoatLog(){
+BoatLog::BoatLog() {
   this->fecha = "";
-  this->hora= "";
-  this->puntoEntrada= "";
-  this->ubi= "";
-  this->mes="";
-
+  this->hora = "";
+  this->puntoEntrada = "";
+  this->ubi = "";
+  this->mes = "";
 }
 
-
-
-
-
-#endif 
+#endif
