@@ -2,6 +2,7 @@
 #define Queue_h
 
 #include "Node.h"
+#include <iostream>
 
 template <class T> class Queue {
 private:
