@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <vector>
 
-template <class T> class Graph {
+template <typename T> class Graph {
 private:
   std::vector<std::vector<Vertex<T>>>
       graph; // el grafo en si, es una hash table que guarda las conecciones que
@@ -30,14 +30,14 @@ public:
   void Dijkstra(T vertex);
 };
 
-template <class T> void Graph<T>::addEdge(Vertex<T> edge) {
+template <typename T> void Graph<T>::addEdge(Vertex<T> edge) {
   int sourceIndex = findVertex(edge.source);
   if (sourceIndex != -1) {
     graph[sourceIndex].push_back(edge);
   }
 }
 
-template <class T> void Graph<T>::addEdges(std::vector<Vertex<T>> edges) {
+template <typename T> void Graph<T>::addEdges(std::vector<Vertex<T>> edges) {
   for (int i = 0; i < edges.size(); i++) {
     int sourceIndex = findVertex(edges[i].source);
     if (sourceIndex != -1) {
@@ -46,13 +46,13 @@ template <class T> void Graph<T>::addEdges(std::vector<Vertex<T>> edges) {
   }
 }
 
-template <class T> Graph<T>::Graph() { size = 0; }
-template <class T> Graph<T>::Graph(std::vector<T> vertices) {
+template <typename T> Graph<T>::Graph() { size = 0; }
+template <typename T> Graph<T>::Graph(std::vector<T> vertices) {
   this->vertices = vertices;
   size = vertices.size();
   graph.resize(size);
 }
-template <class T> int Graph<T>::findVertex(T Vertex) {
+template <typename T> int Graph<T>::findVertex(T Vertex) {
   typename std::vector<int>::iterator it =
       find(vertices.begin(), vertices.end(), Vertex);
   if (it != vertices.end()) {
@@ -63,7 +63,7 @@ template <class T> int Graph<T>::findVertex(T Vertex) {
   }
 }
 
-template <class T>
+template <typename T>
 Graph<T>::Graph(std::vector<T> vertices, std::vector<Vertex<T>> edges) {
   // agrega el vector de vertices
   this->vertices = vertices;
@@ -84,7 +84,7 @@ Graph<T>::Graph(std::vector<T> vertices, std::vector<Vertex<T>> edges) {
   }
 }
 
-template <class T> void Graph<T>::print() {
+template <typename T> void Graph<T>::print() {
   for (int i = 0; i < vertices.size(); i++) {
     std::cout << vertices[i] << "->";
     if (graph[i].size() != 0) {
@@ -95,7 +95,8 @@ template <class T> void Graph<T>::print() {
     }
   }
 }
-template <class T> void Graph<T>::DFSR(int index, std::vector<bool> &status) {
+template <typename T>
+void Graph<T>::DFSR(int index, std::vector<bool> &status) {
   std::cout << vertices[index];
   status[index] = true;
   for (auto Adj : graph[index]) {
@@ -106,7 +107,7 @@ template <class T> void Graph<T>::DFSR(int index, std::vector<bool> &status) {
   }
 }
 
-template <class T> void Graph<T>::DFS(T vertex) {
+template <typename T> void Graph<T>::DFS(T vertex) {
   int index = findVertex(vertex);
   std::vector<bool> status;
   if (index <= -1) {
@@ -119,7 +120,7 @@ template <class T> void Graph<T>::DFS(T vertex) {
   }
 }
 
-template <class T> void Graph<T>::Dijkstra(T vertex) {
+template <typename T> void Graph<T>::Dijkstra(T vertex) {
   // Obtener el índice del vértice que recibimos de parámetro
   int vertexIndex = findVertex(vertex);
   // Validar que si exista el vértice en la tabla de vértices
@@ -206,7 +207,7 @@ template <class T> void Graph<T>::Dijkstra(T vertex) {
     std::cout << "El vértice inicial no existe" << std::endl;
   }
 
-  template <class T>
+  template <typename T>
   int Graph<T>::getSmallIndex(vector<bool> status, vector<int> cost) {
     // Creamos una variable con el valor menor que sea igual a infinito
     // (minCost)
